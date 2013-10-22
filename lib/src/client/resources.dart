@@ -8,7 +8,7 @@ class AchievementsResource_ {
       _client = client;
 
   /**
-   * Resets the achievement with the given ID. This method is only accessible to whitelisted tester accounts for your application.
+   * Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
    *
    * [achievementId] - The ID of the achievement used by this method.
    *
@@ -243,7 +243,7 @@ class ScoresResource_ {
       _client = client;
 
   /**
-   * Reset scores for the specified leaderboard, resetting the leaderboard to empty. This method is only accessible to whitelisted tester accounts for your application.
+   * Reset scores for the specified leaderboard for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
    *
    * [leaderboardId] - The ID of the leaderboard.
    *

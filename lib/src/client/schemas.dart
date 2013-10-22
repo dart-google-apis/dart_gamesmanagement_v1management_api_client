@@ -34,7 +34,7 @@ class AchievementResetAllResponse {
   }
 
   /** Return String representation of AchievementResetAllResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -94,7 +94,7 @@ Possible values are:
   }
 
   /** Return String representation of AchievementResetResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -141,7 +141,7 @@ class HiddenPlayer {
   }
 
   /** Return String representation of HiddenPlayer */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -188,7 +188,7 @@ class HiddenPlayerList {
   }
 
   /** Return String representation of HiddenPlayerList */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -244,7 +244,7 @@ class Player {
   }
 
   /** Return String representation of Player */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -286,7 +286,7 @@ Possible values are:
   }
 
   /** Return String representation of PlayerScoreResetResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
