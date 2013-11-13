@@ -14,7 +14,7 @@ Adding dependency to pubspec.yaml
 
 ```
   dependencies:
-    google_gamesmanagement_v1management_api: '>=0.4.2'
+    google_gamesmanagement_v1management_api: '>=0.4.3'
 ```
 
 For web applications:
@@ -29,13 +29,13 @@ For console application:
   import "package:google_gamesmanagement_v1management_api/gamesmanagement_v1management_api_console.dart" as gamesmanagementclient;
 ```
 
-Working with out authentication the following constructor can be called:
+Working without authentication the following constructor can be called:
 
 ```
   var gamesmanagement = new gamesmanagementclient.GamesManagement();
 ```
 
-Working with authentication then create a new `GoogleOAuth2` object and pass it to the constructor:
+To use authentication create a new `GoogleOAuth2` object and pass it to the constructor:
 
 
 ```
