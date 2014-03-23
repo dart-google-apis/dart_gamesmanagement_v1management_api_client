@@ -98,6 +98,44 @@ Possible values are:
 
 }
 
+/** This is a JSON template for 3P metadata about a player playing a game. */
+class GamesPlayedResource {
+
+  /** True if the player was auto-matched with the currently authenticated user. */
+  core.bool autoMatched;
+
+  /** The last time the player played the game in milliseconds since the epoch in UTC. */
+  core.int timeMillis;
+
+  /** Create new GamesPlayedResource from JSON data */
+  GamesPlayedResource.fromJson(core.Map json) {
+    if (json.containsKey("autoMatched")) {
+      autoMatched = json["autoMatched"];
+    }
+    if (json.containsKey("timeMillis")) {
+      timeMillis = (json["timeMillis"] is core.String) ? core.int.parse(json["timeMillis"]) : json["timeMillis"];
+    }
+  }
+
+  /** Create JSON Object for GamesPlayedResource */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (autoMatched != null) {
+      output["autoMatched"] = autoMatched;
+    }
+    if (timeMillis != null) {
+      output["timeMillis"] = timeMillis;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GamesPlayedResource */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** This is a JSON template for the HiddenPlayer resource. */
 class HiddenPlayer {
 
@@ -204,6 +242,12 @@ class Player {
   /** Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#player. */
   core.String kind;
 
+  /** Details about the last time this player played a multiplayer game with the currently authenticated player. Populated for PLAYED_WITH player collection members. */
+  GamesPlayedResource lastPlayedWith;
+
+  /** An object representation of the individual components of the player's name. */
+  PlayerName name;
+
   /** The ID of the player. */
   core.String playerId;
 
@@ -217,6 +261,12 @@ class Player {
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
+    }
+    if (json.containsKey("lastPlayedWith")) {
+      lastPlayedWith = new GamesPlayedResource.fromJson(json["lastPlayedWith"]);
+    }
+    if (json.containsKey("name")) {
+      name = new PlayerName.fromJson(json["name"]);
     }
     if (json.containsKey("playerId")) {
       playerId = json["playerId"];
@@ -236,6 +286,12 @@ class Player {
     if (kind != null) {
       output["kind"] = kind;
     }
+    if (lastPlayedWith != null) {
+      output["lastPlayedWith"] = lastPlayedWith.toJson();
+    }
+    if (name != null) {
+      output["name"] = name.toJson();
+    }
     if (playerId != null) {
       output["playerId"] = playerId;
     }
@@ -244,6 +300,44 @@ class Player {
   }
 
   /** Return String representation of Player */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** An object representation of the individual components of the player's name. */
+class PlayerName {
+
+  /** The family name (last name) of this player. */
+  core.String familyName;
+
+  /** The given name (first name) of this player. */
+  core.String givenName;
+
+  /** Create new PlayerName from JSON data */
+  PlayerName.fromJson(core.Map json) {
+    if (json.containsKey("familyName")) {
+      familyName = json["familyName"];
+    }
+    if (json.containsKey("givenName")) {
+      givenName = json["givenName"];
+    }
+  }
+
+  /** Create JSON Object for PlayerName */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (familyName != null) {
+      output["familyName"] = familyName;
+    }
+    if (givenName != null) {
+      output["givenName"] = givenName;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of PlayerName */
   core.String toString() => JSON.encode(this.toJson());
 
 }

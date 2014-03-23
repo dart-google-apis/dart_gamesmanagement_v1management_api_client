@@ -13,6 +13,7 @@ abstract class Client extends ClientBase {
   PlayersResource_ get players => new PlayersResource_(this);
   RoomsResource_ get rooms => new RoomsResource_(this);
   ScoresResource_ get scores => new ScoresResource_(this);
+  TurnBasedMatchesResource_ get turnBasedMatches => new TurnBasedMatchesResource_(this);
 
   //
   // Parameters
