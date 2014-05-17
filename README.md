@@ -14,7 +14,7 @@ Adding dependency to pubspec.yaml
 
 ```
   dependencies:
-    google_gamesmanagement_v1management_api: '>=0.4.4'
+    google_gamesmanagement_v1management_api: '>=0.4.5'
 ```
 
 For web applications:

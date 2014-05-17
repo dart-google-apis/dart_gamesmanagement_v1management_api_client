@@ -98,7 +98,7 @@ Possible values are:
 
 }
 
-/** This is a JSON template for 3P metadata about a player playing a game. */
+/** This is a JSON template for metadata about a player playing a game with the currently authenticated user. */
 class GamesPlayedResource {
 
   /** True if the player was auto-matched with the currently authenticated user. */
