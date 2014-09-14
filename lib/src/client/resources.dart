@@ -151,6 +151,106 @@ class ApplicationsResource_ {
   }
 }
 
+class EventsResource_ {
+
+  final Client _client;
+
+  EventsResource_(Client client) :
+      _client = client;
+
+  /**
+   * Reset all player progress on the event for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All resources that use the event will also be reset.
+   *
+   * [eventId] - The ID of the event.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> reset(core.String eventId, {core.Map optParams}) {
+    var url = "events/{eventId}/reset";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (eventId == null) paramErrors.add("eventId is required");
+    if (eventId != null) urlParams["eventId"] = eventId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
+    return response;
+  }
+
+  /**
+   * Reset all player progress on all unpublished events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All resources that use the events will also be reset.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> resetAll({core.Map optParams}) {
+    var url = "events/reset";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
+    return response;
+  }
+
+  /**
+   * Reset all player progress on the event for all players. This method is only available to user accounts for your developer console. Only draft events can be reset. All resources that use the event will also be reset.
+   *
+   * [eventId] - The ID of the event.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> resetForAllPlayers(core.String eventId, {core.Map optParams}) {
+    var url = "events/{eventId}/resetForAllPlayers";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (eventId == null) paramErrors.add("eventId is required");
+    if (eventId != null) urlParams["eventId"] = eventId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
+    return response;
+  }
+}
+
 class PlayersResource_ {
 
   final Client _client;
@@ -227,6 +327,46 @@ class PlayersResource_ {
 
     var response;
     response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
+    return response;
+  }
+}
+
+class QuestsResource_ {
+
+  final Client _client;
+
+  QuestsResource_(Client client) :
+      _client = client;
+
+  /**
+   * Reset all player progress on the quest for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+   *
+   * [questId] - The ID of the quest.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> reset(core.String questId, {core.Map optParams}) {
+    var url = "quests/{questId}/reset";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (questId == null) paramErrors.add("questId is required");
+    if (questId != null) urlParams["questId"] = questId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
     return response;
   }
 }

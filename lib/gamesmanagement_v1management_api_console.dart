@@ -7,6 +7,7 @@ import 'package:google_gamesmanagement_v1management_api/src/console_client.dart'
 import "package:google_gamesmanagement_v1management_api/gamesmanagement_v1management_api_client.dart";
 
 /** The Management API for Google Play Game Services. */
+@deprecated
 class GamesManagement extends Client with ConsoleClient {
 
   /** OAuth Scope2: Share your Google+ profile information and view and manage your game activity */

@@ -136,6 +136,109 @@ class GamesPlayedResource {
 
 }
 
+/** This is a JSON template for 1P/3P metadata about the player's experience. */
+class GamesPlayerExperienceInfoResource {
+
+  /** The current number of experience points for the player. */
+  core.int currentExperiencePoints;
+
+  /** The current level of the player. */
+  GamesPlayerLevelResource currentLevel;
+
+  /** The timestamp when the player was leveled up, in millis since Unix epoch UTC. */
+  core.int lastLevelUpTimestampMillis;
+
+  /** The next level of the player. If the current level is the maximum level, this should be same as the current level. */
+  GamesPlayerLevelResource nextLevel;
+
+  /** Create new GamesPlayerExperienceInfoResource from JSON data */
+  GamesPlayerExperienceInfoResource.fromJson(core.Map json) {
+    if (json.containsKey("currentExperiencePoints")) {
+      currentExperiencePoints = (json["currentExperiencePoints"] is core.String) ? core.int.parse(json["currentExperiencePoints"]) : json["currentExperiencePoints"];
+    }
+    if (json.containsKey("currentLevel")) {
+      currentLevel = new GamesPlayerLevelResource.fromJson(json["currentLevel"]);
+    }
+    if (json.containsKey("lastLevelUpTimestampMillis")) {
+      lastLevelUpTimestampMillis = (json["lastLevelUpTimestampMillis"] is core.String) ? core.int.parse(json["lastLevelUpTimestampMillis"]) : json["lastLevelUpTimestampMillis"];
+    }
+    if (json.containsKey("nextLevel")) {
+      nextLevel = new GamesPlayerLevelResource.fromJson(json["nextLevel"]);
+    }
+  }
+
+  /** Create JSON Object for GamesPlayerExperienceInfoResource */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (currentExperiencePoints != null) {
+      output["currentExperiencePoints"] = currentExperiencePoints;
+    }
+    if (currentLevel != null) {
+      output["currentLevel"] = currentLevel.toJson();
+    }
+    if (lastLevelUpTimestampMillis != null) {
+      output["lastLevelUpTimestampMillis"] = lastLevelUpTimestampMillis;
+    }
+    if (nextLevel != null) {
+      output["nextLevel"] = nextLevel.toJson();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GamesPlayerExperienceInfoResource */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** This is a JSON template for 1P/3P metadata about a user's level. */
+class GamesPlayerLevelResource {
+
+  /** The level for the user. */
+  core.int level;
+
+  /** The maximum experience points for this level. */
+  core.int maxExperiencePoints;
+
+  /** The minimum experience points for this level. */
+  core.int minExperiencePoints;
+
+  /** Create new GamesPlayerLevelResource from JSON data */
+  GamesPlayerLevelResource.fromJson(core.Map json) {
+    if (json.containsKey("level")) {
+      level = json["level"];
+    }
+    if (json.containsKey("maxExperiencePoints")) {
+      maxExperiencePoints = (json["maxExperiencePoints"] is core.String) ? core.int.parse(json["maxExperiencePoints"]) : json["maxExperiencePoints"];
+    }
+    if (json.containsKey("minExperiencePoints")) {
+      minExperiencePoints = (json["minExperiencePoints"] is core.String) ? core.int.parse(json["minExperiencePoints"]) : json["minExperiencePoints"];
+    }
+  }
+
+  /** Create JSON Object for GamesPlayerLevelResource */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (level != null) {
+      output["level"] = level;
+    }
+    if (maxExperiencePoints != null) {
+      output["maxExperiencePoints"] = maxExperiencePoints;
+    }
+    if (minExperiencePoints != null) {
+      output["minExperiencePoints"] = minExperiencePoints;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GamesPlayerLevelResource */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** This is a JSON template for the HiddenPlayer resource. */
 class HiddenPlayer {
 
@@ -239,17 +342,23 @@ class Player {
   /** The name to display for the player. */
   core.String displayName;
 
+  /** An object to represent Play Game experience information for the player. */
+  GamesPlayerExperienceInfoResource experienceInfo;
+
   /** Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#player. */
   core.String kind;
 
   /** Details about the last time this player played a multiplayer game with the currently authenticated player. Populated for PLAYED_WITH player collection members. */
   GamesPlayedResource lastPlayedWith;
 
-  /** An object representation of the individual components of the player's name. */
+  /** An object representation of the individual components of the player's name. For some players, these fields may not be present. */
   PlayerName name;
 
   /** The ID of the player. */
   core.String playerId;
+
+  /** The player's title rewarded for their game activities. */
+  core.String title;
 
   /** Create new Player from JSON data */
   Player.fromJson(core.Map json) {
@@ -258,6 +367,9 @@ class Player {
     }
     if (json.containsKey("displayName")) {
       displayName = json["displayName"];
+    }
+    if (json.containsKey("experienceInfo")) {
+      experienceInfo = new GamesPlayerExperienceInfoResource.fromJson(json["experienceInfo"]);
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -271,6 +383,9 @@ class Player {
     if (json.containsKey("playerId")) {
       playerId = json["playerId"];
     }
+    if (json.containsKey("title")) {
+      title = json["title"];
+    }
   }
 
   /** Create JSON Object for Player */
@@ -282,6 +397,9 @@ class Player {
     }
     if (displayName != null) {
       output["displayName"] = displayName;
+    }
+    if (experienceInfo != null) {
+      output["experienceInfo"] = experienceInfo.toJson();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -295,6 +413,9 @@ class Player {
     if (playerId != null) {
       output["playerId"] = playerId;
     }
+    if (title != null) {
+      output["title"] = title;
+    }
 
     return output;
   }
@@ -304,13 +425,13 @@ class Player {
 
 }
 
-/** An object representation of the individual components of the player's name. */
+/** An object representation of the individual components of the player's name. For some players, these fields may not be present. */
 class PlayerName {
 
-  /** The family name (last name) of this player. */
+  /** The family name of this player. In some places, this is known as the last name. */
   core.String familyName;
 
-  /** The given name (first name) of this player. */
+  /** The given name of this player. In some places, this is known as the first name. */
   core.String givenName;
 
   /** Create new PlayerName from JSON data */

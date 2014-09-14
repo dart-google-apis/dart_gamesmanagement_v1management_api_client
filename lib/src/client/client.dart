@@ -10,7 +10,9 @@ abstract class Client extends ClientBase {
 
   AchievementsResource_ get achievements => new AchievementsResource_(this);
   ApplicationsResource_ get applications => new ApplicationsResource_(this);
+  EventsResource_ get events => new EventsResource_(this);
   PlayersResource_ get players => new PlayersResource_(this);
+  QuestsResource_ get quests => new QuestsResource_(this);
   RoomsResource_ get rooms => new RoomsResource_(this);
   ScoresResource_ get scores => new ScoresResource_(this);
   TurnBasedMatchesResource_ get turnBasedMatches => new TurnBasedMatchesResource_(this);
